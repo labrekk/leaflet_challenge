@@ -4,7 +4,7 @@ var myMap = L.map("mapid", {
   zoom: 2
 });
 
-// Adding the tile layer
+// Adding tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
@@ -14,7 +14,7 @@ var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geo
 function radiusFind (magnitude) {
   return magnitude * 5
 }
-
+// color if else function - EQ depth
 function colorMarker (depth) {
   if (depth > 90 ) {
     return "#3AB341"
@@ -43,7 +43,7 @@ d3.json(url).then(function (data) {
   L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
       return L.circleMarker(latlng)
-
+      // *RETURN* exits a function - basically ends the function. call console.log() before return statement
     },
     onEachFeature: function (feature, layer) {
       layer.bindPopup("<h3>Location: " + feature.properties.place + "</h3><hr><p>Magnitude: " + feature.properties.mag +  "</p><p>Depth: " + feature.geometry.coordinates[2] );
